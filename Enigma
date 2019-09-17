@@ -17,9 +17,9 @@ Rotor rotor[3];
 
 string reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
 
-string change1, chang2;
+int change1, change2;
 
-string input, output;
+int input, output;
 
 //選盤子
 void set()
@@ -30,7 +30,15 @@ void set()
 //加密
 void encrypt()
 {
+	//換一個 plug
+	if (input == change1)
+		input = change2;
+	else if(input == change2)
+		input = change1;
 
+	int outRotor1 = (rotor[0].start[0] + input) % 26;
+
+	int inRotor1 = rotor[0].a[outRotor1]+26- rotor[0].start[0];
 }
 
 //測試
@@ -40,13 +48,12 @@ void test()
 }
 
 
-//測試
 int main() {
 
 	set();
 	encrypt();
 	test();
-
+	int a = 'A';
+	cout << a;
 	return 0;
 }
-
