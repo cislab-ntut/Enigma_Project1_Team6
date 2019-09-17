@@ -1,1 +1,52 @@
+#include <iostream>
+using namespace std;
+
+struct Rotor
+{
+	string a;
+	string pin, start;
+};
+
+Rotor rotor1 = { "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", "Y" };
+Rotor rotor2 = { "AJDKSIRUXBLHWTMCQGZNPYFVOE", "E", "M" };
+Rotor rotor3 = { "BDFHJLCPRTXVZNYEIWGAKMUSQO", "V", "D" };
+Rotor rotor4 = { "ESOVPZJAYQUIRHXLNFTGKDCMWB", "J", "R" };
+Rotor rotor5 = { "VZBRGITYUPSDNHLXAWMJQOFECK", "Z", "H" };
+
+Rotor rotor[3];
+
+string reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+
+string change1, chang2;
+
+string input, output;
+
+//選盤子
+void set()
+{
+
+}
+
+//加密
+void encrypt()
+{
+
+}
+
+//測試
+void test()
+{
+
+}
+
+
+//測試
+int main() {
+
+	set();
+	encrypt();
+	test();
+
+	return 0;
+}
 
