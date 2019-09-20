@@ -74,15 +74,32 @@ void set()
 //加密
 void encrypt()
 {
-	//換一個 plug
+	/*------------------------------------對應插座------------------------------------------*/
 	if (input == change1)
 		input = change2;
 	else if(input == change2)
 		input = change1;
 
-	int outRotor1 = (rotor[0].start[0] + input) % 26;
+	/*------------------------------------設定加密方法------------------------------------------*/
+	//如果第二個指針碰到藍藍，第二、三個藍藍轉一個
+	if (rotor[1].current == rotor[1].pin)
+	{
+		rotor[1].current = (rotor[1].current + 1) % 26;
+		rotor[2].current = (rotor[2].current + 1) % 26;
+	}
 
-	int inRotor1 = rotor[0].a[outRotor1]+26- rotor[0].start[0];
+	//如果第一個指針碰到藍藍，第二個藍藍轉一個
+	if(rotor[0].current == rotor[0].pin)
+		rotor[1].current = (rotor[1].current + 1) % 26;
+
+	//第一個藍藍轉一個
+	rotor[0].current = (rotor[0].current + 1) % 26;
+	
+	/*------------------------------------對應插座------------------------------------------*/
+	if (output == change1)
+		output = change2;
+	else if (output == change2)
+		output = change1;
 }
 
 //測試
