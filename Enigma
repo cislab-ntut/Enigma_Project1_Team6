@@ -4,14 +4,14 @@ using namespace std;
 struct Rotor
 {
 	string a;
-	string pin, start;
+	int pin, current;
 };
 
-Rotor rotor1 = { "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q", "Y" };
-Rotor rotor2 = { "AJDKSIRUXBLHWTMCQGZNPYFVOE", "E", "M" };
-Rotor rotor3 = { "BDFHJLCPRTXVZNYEIWGAKMUSQO", "V", "D" };
-Rotor rotor4 = { "ESOVPZJAYQUIRHXLNFTGKDCMWB", "J", "R" };
-Rotor rotor5 = { "VZBRGITYUPSDNHLXAWMJQOFECK", "Z", "H" };
+Rotor rotor1 = { "EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'R' - 'A', 'H' - 'A' };
+Rotor rotor2 = { "AJDKSIRUXBLHWTMCQGZNPYFVOE", 'F' - 'A', 'D' - 'A' };
+Rotor rotor3 = { "BDFHJLCPRTXVZNYEIWGAKMUSQO", 'W' - 'A', 'X' - 'A' };
+Rotor rotor4 = { "ESOVPZJAYQUIRHXLNFTGKDCMWB", 'J' - 'A', 'R' - 'A' };
+Rotor rotor5 = { "VZBRGITYUPSDNHLXAWMJQOFECK", 'Z' - 'A', 'H' - 'A' };
 
 Rotor rotor[3];
 
