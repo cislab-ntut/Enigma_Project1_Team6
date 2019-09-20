@@ -120,7 +120,43 @@ void encrypt()
 	//反射的字母本人及對應位置(第三內圈的字母對應位置)
 	int refl = reflector[inRotor3] - 'A';
 	
-	
+	//反射到第三內圈的字母本人
+	inRotor3 = (rotor[2].current + refl) % 26;
+	//反射第三外圈的字母對應位置(第二內圈的字母對應位置)
+	for (int i = 0; i <= 25; i++)
+	{
+		if (inRotor3 == rotor[2].a[i] - 'A')
+		{
+			outRotor3 = (26 - rotor[2].current + i) % 26;
+			break;
+		}
+	}
+
+	//反射到第二內圈的字母本人
+	inRotor2 = (rotor[1].current + outRotor3) % 26;
+	//反射第二外圈的字母對應位置(第一內圈的字母對應位置)
+	for (int i = 0; i <= 25; i++)
+	{
+		if (inRotor2 == rotor[1].a[i] - 'A')
+		{
+			outRotor2 = (26 - rotor[1].current + i) % 26;
+			break;
+		}
+	}
+
+	//反射到第一內圈的字母本人
+	inRotor1 = (rotor[0].current + outRotor2) % 26;
+	//反射第一外圈的字母對應位置(插座字母對應位置)
+	for (int i = 0; i <= 25; i++)
+	{
+		if (inRotor1 == rotor[0].a[i] - 'A')
+		{
+			outRotor1 = (26 - rotor[0].current + i) % 26;
+			break;
+		}
+	}
+
+	output = outRotor1;	
 	
 	/*------------------------------------對應插座------------------------------------------*/
 	if (output == change1)
