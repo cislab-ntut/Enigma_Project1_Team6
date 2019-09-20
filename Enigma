@@ -95,6 +95,33 @@ void encrypt()
 	//第一個藍藍轉一個
 	rotor[0].current = (rotor[0].current + 1) % 26;
 	
+	/*------------------------------------找到加密文字------------------------------------------*/
+	//第一外圈的字母本人
+	int outRotor1 = (rotor[0].current + input) % 26;
+	//第一內圈的字母對應位置(第二外圈的字母對應位置)
+	int inRotor1 = rotor[0].a[outRotor1] - 'A' - rotor[0].current;
+	if (inRotor1 < 0)
+		inRotor1 += 26;
+
+	//第二外圈的字母本人
+	int outRotor2 = (rotor[1].current + inRotor1) % 26;
+	//第二內圈的字母對應位置(第三外圈的字母對應位置)
+	int inRotor2 = rotor[1].a[outRotor2] - 'A' - rotor[1].current;
+	if (inRotor2 < 0)
+		inRotor2 += 26;
+
+	//第三外圈的字母本人
+	int outRotor3 = (rotor[2].current + inRotor2) % 26;
+	//第三內圈的字母對應位置(反射圈的字母本人及對應位置)
+	int inRotor3 = rotor[2].a[outRotor3] - 'A' - rotor[2].current;
+	if (inRotor3 < 0)
+		inRotor3 += 26;
+
+	//反射的字母本人及對應位置(第三內圈的字母對應位置)
+	int refl = reflector[inRotor3] - 'A';
+	
+	
+	
 	/*------------------------------------對應插座------------------------------------------*/
 	if (output == change1)
 		output = change2;
