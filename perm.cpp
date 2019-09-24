@@ -1,17 +1,16 @@
 #include <stdio.h>
 #include <iostream>
-#define N 4
+#define N 12
 using namespace std;
 
 int a[N];
+int PB_testCase[N];
 void perm(int); /*求陣列的全排列 */
 void printnum();
 void swap(int, int);
 int main() {
-	int i;
-	for (i = 0; i < N; i++) {
-		a[i] = i + 1;
-	}
+	for (int i = 0; i < N; i++)
+		a[i] = PB_testCase[i];
 	perm(0);
 	system("pause");
 	return 0;
