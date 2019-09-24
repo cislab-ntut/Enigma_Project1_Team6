@@ -39,4 +39,5 @@ int main() {
       Combi(a, i, 0, 0, check, n);
    }
    return 0;
+   //https://www.tutorialspoint.com/cplusplus-program-to-generate-all-possible-combinations-out-of-a-b-c-d-e
 }
