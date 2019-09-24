@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <time.h>
+#define N 12
 using namespace std;
 
 struct Rotor
@@ -19,90 +20,50 @@ Rotor rotor[3];
 
 string reflector = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
 
+int PB_testCase[12];
+
 int change1[6] = { -1, -1,-1 ,-1 ,-1 ,-1 }, change2[6] = { -1,-1 ,-1 ,-1 ,-1 ,-1 };
 
 int input, output;
 
+int a[N]; 
+
+void perm(int); /*求陣列的全排列 */
+void printnum();
+void swap(int, int);
+
 //選盤子
-void set()
+void set(int plate[3],int starting[3])
 {
-	int plate[3];
-	string starting[3];
-	do {
-		cout << "輸入第一個盤子(1~5): ";
-		cin >> plate[0];
-		cout << "輸入第一個起始位置(A~Z): ";
-		cin >> starting[0];
-		cout << endl;
-	} while (plate[0] < 1 || plate[0] > 5);
-	do {
-		cout << "輸入第二個盤子(1~5): ";
-		cin >> plate[1];
-		cout << "輸入第二個起始位置(A~Z): ";
-		cin >> starting[1];
-		cout << endl;
-	} while (plate[1] < 1 || plate[1] > 5 || plate[1] == plate[0]);
-	do {
-		cout << "輸入第三個盤子(1~5): ";
-		cin >> plate[2];
-		cout << "輸入第三個起始位置(A~Z): ";
-		cin >> starting[2];
-		cout << endl;
-	} while (plate[2] < 1 || plate[2] > 5 || plate[2] == plate[0] || plate[2] == plate[1]);
-	
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 5; j++) {
 			if (plate[i] == 1)
 			{
-				rotor1.current = starting[i][0] - 'A';
+				rotor1.current = starting[i] - 'A';
 				rotor[i] = rotor1;
 			}
 			else if (plate[i] == 2)
 			{
-				rotor2.current = starting[i][0] - 'A';
+				rotor2.current = starting[i] - 'A';
 				rotor[i] = rotor2;
 			}
 			else if (plate[i] == 3)
 			{
-				rotor3.current = starting[i][0] - 'A';
+				rotor3.current = starting[i] - 'A';
 				rotor[i] = rotor3;
 			}
 			else if (plate[i] == 4)
 			{
-				rotor4.current = starting[i][0] - 'A';
+				rotor4.current = starting[i] - 'A';
 				rotor[i] = rotor4;
 			}
 			else
 			{
-				rotor5.current = starting[i][0] - 'A';
+				rotor5.current = starting[i] - 'A';
 				rotor[i] = rotor5;
 			}
 		}
 	}
-
-	string temp;
-	for (int i = 0; i < 6; i++)
-	{
-		cout << "請輸入第" << i + 1 << "組交換(輸入0結束):";
-		cin >> temp;
-		if (temp == "0")
-			break;
-		change1[i] = temp[0] - 'A';
-		change2[i] = temp[1] - 'A';
-	}
-
-	/*
-	//隨機產生change，從 0~26， 0為不交換
-	srand(time(NULL));
-	change1 = rand() % 27;
-	if (change1 == 0)
-		change2 = 0;
-	else
-		do {
-			change2 = rand() % 27;
-		} while (change2 == 0);
-		//cout << change1 << "  " << change2 << endl;
-	*/
 }
 
 //加密
@@ -111,8 +72,6 @@ void encrypt()
 	/*------------------------------------對應插座------------------------------------------*/
 	for (int i = 0; i < 6; i++)
 	{
-		if (change1 < 0 || change2 < 0)
-			break;
 		if (input == change1[i])
 			input = change2[i];
 		else if (input == change2[i])
@@ -200,8 +159,6 @@ void encrypt()
 	/*------------------------------------對應插座------------------------------------------*/
 	for (int i = 0; i < 6; i++)
 	{
-		if (change1 < 0 || change2 < 0)
-			break;
 		if (output == change1[i])
 			output = change2[i];
 		else if (output == change2[i])
@@ -209,34 +166,128 @@ void encrypt()
 	}
 }
 
+void perm(int offset) {
+	int i, temp;
+	if (offset == N / 2) {  // BaseCase
+		printnum();
+		return;
+	}
+	else {
+		for (i = offset; i < N; i++) {
+			swap(i, offset);//交換字首
+			perm(offset + 1);//遞迴
+			swap(i, offset);//將字首換回來，繼續做前一次排列
+		}
+	}
+}
+
+void printnum() 
+{
+	for (int i = 0; i < N; i += 2)
+	{
+		change1[i / 2] = a[i];
+		change2[i / 2] = a[i + 1];
+	}
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!大家改這裡喔!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	int plate[3] = { 1, 2, 3 };
+	int starting[3];
+	for (int i = 0; i < 26; i++)
+	{
+		starting[0] = i;
+		for (int j = 0; j < 26; j++)
+		{
+			starting[1] = j;
+			for (int k = 0; k < 26; k++)
+			{
+				starting[2] = k;
+				set(plate, starting);
+
+				string user_input = "ZATVAWORBRQGRJSXZVNORWZBLORMEGRASLQLAFWXZYODVVTDHCIRDMNWOPNIXVKASIIIALOOSZXAMSYCQHYGPRLMSACGAWPCPAVZTMUUZCTJDVBUZAGFWMIVEZGBTLFIQDPPRZHDNKIPQHUGCXZM";
+				string user_output = "";
+
+				for (int i = 0; i < user_input.size(); i++)
+				{
+					input = int(user_input[i]) - 'A';
+					encrypt();
+					output += 'A';
+					if (i >= 138)
+					{
+						if (i == 138 && output != 'H')
+							break;
+						user_output += (char)output;
+					}
+				}
+				if (user_output != "") 
+				{
+					cout << user_output << endl;
+					if (user_output == "HEILHITLER")
+					{
+						cout << "Rotor：" << plate[0] << "\t" << plate[1] << "\t" << plate[2] << endl;
+						cout << "Starting：" << char(starting[0] + 'A') << "\t" << char(starting[1] + 'A') << "\t" << char(starting[2] + 'A') << endl;
+						cout << "Plug Board：";
+						for (int i = 0; i < 6; i++)
+						{
+							cout << char(change1[i] + 'A') << char(change2[i] + 'A') << "\t";
+						}
+						cout << endl;
+					}
+					system("pause");
+				}
+			}
+		}
+	}
+}
+
+void swap(int i, int offset) {
+	int temp;
+	temp = a[offset];
+	a[offset] = a[i];
+	a[i] = temp;
+}
+
 //測試
 void test()
 {
-
+	//這邊要把PB_testCase選出來的12個倆倆組合後，丟到下面做
+	for (int i = 0; i < N; i++)
+		a[i] = PB_testCase[i];
+	perm(0);
 }
 
+void Combi(int a[], int reqLen, int s, int currLen, bool check[], int l)
+{
+	if (currLen > reqLen)
+		return;
+	else if (currLen == reqLen) {
+		int index = 0;
+		for (int i = 0; i < l; i++) {
+			if (check[i] == true) {
+				PB_testCase[index++] = a[i];
+			}
+		}
+		test();
+		return;
+	}
+	if (s == l) {
+		return;
+	}
+	check[s] = true;
+	Combi(a, reqLen, s + 1, currLen + 1, check, l);
+	check[s] = false;
+	Combi(a, reqLen, s + 1, currLen, check, l);
+}
 
 int main() {
-	set();
-
-	string user_input;
-	string user_output = "";
-
-	//user輸入一大串字母
-	cout << endl;
-	cout << "輸入大寫字母:";
-	cin >> user_input;
-
-	for (int i = 0; i < user_input.size(); i++)
+	
+	int a[26];
+	bool check[26];
+	for (int i = 0; i < 26; ++i)
 	{
-		input = int(user_input[i]) - 'A';
-		encrypt();
-		output += 'A';
-		user_output += (char)output;
+		a[i] = i;
+		check[i] = false;
 	}
-	cout << endl;
-	cout << user_output;
-	cout << endl;
+	Combi(a, 12, 0, 0, check, 26);
 
 	return 0;
 }
