@@ -33,33 +33,33 @@ void printnum();
 void swap(int, int);
 
 //選盤子
-void set(int plate[3],int starting[3])
+void set(int plate[], int starting[])
 {
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 5; j++) {
 			if (plate[i] == 1)
 			{
-				rotor1.current = starting[i] - 'A';
+				rotor1.current = starting[i];
 				rotor[i] = rotor1;
 			}
 			else if (plate[i] == 2)
 			{
-				rotor2.current = starting[i] - 'A';
+				rotor2.current = starting[i];
 				rotor[i] = rotor2;
 			}
 			else if (plate[i] == 3)
 			{
-				rotor3.current = starting[i] - 'A';
+				rotor3.current = starting[i];
 				rotor[i] = rotor3;
 			}
 			else if (plate[i] == 4)
 			{
-				rotor4.current = starting[i] - 'A';
+				rotor4.current = starting[i];
 				rotor[i] = rotor4;
 			}
 			else
 			{
-				rotor5.current = starting[i] - 'A';
+				rotor5.current = starting[i];
 				rotor[i] = rotor5;
 			}
 		}
@@ -190,7 +190,7 @@ void printnum()
 	}
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!大家改這裡喔!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	int plate[3] = { 1, 2, 3 };
+	int plate[3] = { 1, X, X };
 	int starting[3];
 	for (int i = 0; i < 26; i++)
 	{
@@ -223,6 +223,7 @@ void printnum()
 					cout << user_output << endl;
 					if (user_output == "HEILHITLER")
 					{
+						cout << "--------------------------------------------------------\n";
 						cout << "Rotor：" << plate[0] << "\t" << plate[1] << "\t" << plate[2] << endl;
 						cout << "Starting：" << char(starting[0] + 'A') << "\t" << char(starting[1] + 'A') << "\t" << char(starting[2] + 'A') << endl;
 						cout << "Plug Board：";
@@ -231,8 +232,9 @@ void printnum()
 							cout << char(change1[i] + 'A') << char(change2[i] + 'A') << "\t";
 						}
 						cout << endl;
+						cout << "--------------------------------------------------------\n";
+						system("pause");
 					}
-					system("pause");
 				}
 			}
 		}
